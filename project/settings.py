@@ -24,9 +24,9 @@ SECRET_KEY = 'owvv$33c&^stknam_)b3#*3ucr^fsaecj#kd)m3n5sek@yqxkr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOGIN_REDIRECT_URL = "/"
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'project.authentication_backends.ScopesOAuth2',
+)
+
+SOCIAL_AUTH_SCOPES_TO_KEY = 'CLIENT_ID_IN_SECRETS_TO'
 
 ROOT_URLCONF = 'project.urls'
 
@@ -62,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -72,6 +82,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+# If your database is PostgreSQL
+# SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 DATABASES = {
     'default': {
