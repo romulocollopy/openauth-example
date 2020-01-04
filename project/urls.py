@@ -21,4 +21,5 @@ from core.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(social_urls, namespace='social')),
+    path('', home, name='home'),
 ]

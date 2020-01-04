@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Project using OpenAuth</title>
+</head>
+<body>
+	{% if user.is_authenticated %}
+		hello, {{ user }}
+		<ul>
+		  <li>{{ user.firt_name }}
+		  <li>{{ user.last_name }}
+		  <li>{{ user.email }}
+		</ul>
+	{% else %}
+		<a href="{% url "social:begin" "scopes-to" %}">Login</a>
+	{% endif %}
+</body>
+</html>
